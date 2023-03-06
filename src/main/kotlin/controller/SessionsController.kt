@@ -1,5 +1,6 @@
 package com.dam.api.controller
 
+import com.dam.api.model.Movie
 import com.dam.api.model.Session
 import com.dam.api.service.api.SesionServiceAPI
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,17 +20,36 @@ import org.springframework.web.bind.annotation.RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/sessions")
 class SessionsController {
+
+    /**
+     * Inyección de dependencia del servicio para [Session]
+     * @see [SesionServiceAPI]
+     */
     @Autowired
     lateinit var sessionService: SesionServiceAPI;
 
+    /**
+     * ### GET ALL SESSIONS
+     * Función para obtener una lista de [Session]
+     * - HTTP method: GET
+     * - ENDPOINT: /api/v1/sessions
+     * @return [ResponseEntity] con una [List] de [Session]
+     */
     @GetMapping()
     fun getAllSessions(): ResponseEntity<List<Session>> {
         return ResponseEntity.ok(sessionService.getAllSessions(sessionService.all))
     }
 
+    /**
+     * ### GET FUTURE SESSIONS
+     * Función para obtener una lista de [Session]
+     * - HTTP method: GET
+     * - ENDPOINT: /api/v1/sessions/future
+     * @return [ResponseEntity] con una [List] de [Session]
+     */
     @GetMapping("/future")
-    fun getAllSessionsSinceToday(): ResponseEntity<List<Session>> {
-        val sessions = sessionService.getSessionsSinceToday(sessionService.all)
+    fun getFutureSessions(): ResponseEntity<List<Session>> {
+        val sessions = sessionService.getFutureSessions(sessionService.all)
         return if (sessions.isNotEmpty()) {
             ResponseEntity.ok(sessions)
         } else {
@@ -37,8 +57,15 @@ class SessionsController {
         }
     }
 
+    /**
+     * ### GET TODAY SESSIONS
+     * Función para obtener una lista de [Session] de hoy
+     * - HTTP method: GET
+     * - ENDPOINT: /api/v1/sessions/today
+     * @return [ResponseEntity] con una [List] de [Session]
+     */
     @GetMapping("/today")
-    fun getAllSessionsFromToday(): ResponseEntity<List<Session>> {
+    fun getTodaySessions(): ResponseEntity<List<Session>> {
         val sessions = sessionService.getTodaySessions(sessionService.all)
         return if (sessions.isNotEmpty()) {
             ResponseEntity.ok(sessions)

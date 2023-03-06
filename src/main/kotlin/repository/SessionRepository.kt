@@ -1,4 +1,4 @@
-package com.dam.api.repositories
+package com.dam.api.repository
 
 import com.dam.api.model.Session
 import org.springframework.data.repository.CrudRepository
