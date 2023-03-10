@@ -28,7 +28,7 @@ class UserServiceImpl : UserServiceAPI, GenericServiceImpl<User, Long>() {
         } else false
 
     }
-    override fun insertUser(user: User){ insertOne(User(user.nick,user.email,user.profilePicture,null)) }
+    override fun insertUser(user: User){ insertOne(User(null, nick = user.nick, email = user.email, profilePicture = user.profilePicture)) }
     override fun updateUser(nick: String,user: User):Boolean{
         val updatedUser = getUserByNick(nick)
         return if (updatedUser!=null){

@@ -44,10 +44,10 @@ class SessionsController {
      * ### GET FUTURE SESSIONS
      * Función para obtener una lista de [Session]
      * - HTTP method: GET
-     * - ENDPOINT: /api/v1/sessions/future
+     * - ENDPOINT: /api/v1/sessions/sincetoday
      * @return [ResponseEntity] con una [List] de [Session]
      */
-    @GetMapping("/future")
+    @GetMapping("/sincetoday")
     fun getFutureSessions(): ResponseEntity<List<Session>> {
         val sessions = sessionService.getFutureSessions(sessionService.all)
         return if (sessions.isNotEmpty()) {

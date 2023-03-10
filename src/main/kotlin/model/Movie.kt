@@ -7,6 +7,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Table(name="movies")
 @EntityListeners(AuditingEntityListener::class)
 class Movie(
+    // Id autogenerado
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long = 0,
     @Column(name="title")
     var title: String,
     @Column(name="director")
@@ -20,9 +24,5 @@ class Movie(
     @Column(name="screenshot")
     var screenshot: String,
     @Column(name="synopsis")
-    var synopsis: String,
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long = 0
+    var synopsis: String
 )

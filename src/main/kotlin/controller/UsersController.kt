@@ -63,7 +63,7 @@ class UsersController {
      */
     @PostMapping
     fun createUser(@RequestBody user: UserDTO){
-        userService.insertUser(User(user.nick,user.email,user.profilePicture,null))
+        userService.insertUser(User(null, nick = user.nick, email = user.email, profilePicture = user.profilePicture))
         ResponseEntity<Unit>(HttpStatus.CREATED)
     }
 
@@ -81,7 +81,7 @@ class UsersController {
      */
     @PutMapping("/{nick}")
     fun updateUser(@PathVariable("nick") nick: String, @RequestBody user: UserDTO){
-        if (userService.updateUser(nick, User(user.nick,user.email,user.profilePicture,null))) {
+        if (userService.updateUser(nick, User(null, nick = user.nick, email = user.email, profilePicture = user.profilePicture))) {
             ResponseEntity<Unit>(HttpStatus.OK)
         } else {
             ResponseEntity<Unit>(HttpStatus.NOT_FOUND)

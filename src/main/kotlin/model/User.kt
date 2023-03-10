@@ -7,15 +7,14 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener
 @Table(name="user")
 @EntityListeners(AuditingEntityListener::class)
 class User(
-
+    // Id autogenerado
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long?,
     @Column(name="nick")
     var nick: String,
     @Column(name="email")
     var email: String,
     @Column(name="profilePicture")
-    var profilePicture: String,
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long?
+    var profilePicture: String
 )
